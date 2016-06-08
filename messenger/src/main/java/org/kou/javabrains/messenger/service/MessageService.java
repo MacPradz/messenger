@@ -1,7 +1,6 @@
 package org.kou.javabrains.messenger.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ public class MessageService {
 
 	public MessageService(){
 		messages.put(1L, new Message(1,"Hello World","Maciej"));
-		messages.put(2L, new Message(2,"Hello Yersey","Maciej"));
+		messages.put(2L, new Message(2,"Hello Yersey","Maciej"));	
 	}
 	
 	public List<Message> getAllMessages() {
