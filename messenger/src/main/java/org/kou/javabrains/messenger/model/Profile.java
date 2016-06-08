@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+//this annotation is required for MediaType.APPLICATION_XML
 @XmlRootElement
 public class Profile {
 
@@ -13,6 +14,7 @@ public class Profile {
 	private String lastName;
 	private Date created;
 
+	// No-Arg constructor is required
 	public Profile() {
 	}
 

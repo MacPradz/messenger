@@ -16,14 +16,17 @@ import javax.ws.rs.core.MediaType;
 import org.kou.javabrains.messenger.model.Message;
 import org.kou.javabrains.messenger.service.MessageService;
 
-@Path("/messages")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+//annotations over class are default to all methods
+@Path("/messages") // parent path to all methods within class
+@Consumes(MediaType.APPLICATION_JSON) // type of response-file
+@Produces(MediaType.APPLICATION_JSON) // type of input-file
 public class MessageResource {
 
 	MessageService messageService = new MessageService();
 
-	@GET
+	@GET // HTTP method
+	// QueryParam annotation allows filtering in URI like .../messages?year=2015
+	// or .../messages?start=1&size=2
 	public List<Message> getMessage(@QueryParam("year") int year, @QueryParam("start") int start,
 			@QueryParam("size") int size) {
 		if (year > 0) {
@@ -41,7 +44,10 @@ public class MessageResource {
 	}
 
 	@PUT
-	@Path("/{messageId}")
+	@Path("/{messageId}") // curly braces allow string variables (here regex is
+							// somehow allowed too)
+	// PathParam value must match variable from @Path. javax is smart enough to
+	// do the casting
 	public Message updateMessage(@PathParam("messageId") long id, Message message) {
 		message.setId(id);
 		return messageService.updateMessage(message);
