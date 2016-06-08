@@ -19,34 +19,35 @@ import org.kou.javabrains.messenger.service.ProfileService;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ProfileResource {
+
 	private ProfileService profileService = new ProfileService();
-	
+
 	@GET
-	public List<Profile> getProfiles(){
+	public List<Profile> getProfiles() {
 		return profileService.getAllProfiles();
 	}
 
 	@POST
-	public Profile addProfile(Profile profile){
+	public Profile addProfile(Profile profile) {
 		return profileService.addProfile(profile);
 	}
-	
+
 	@PUT
 	@Path("/{profileName}")
-	public Profile updateProfile(@PathParam("profileName") String profileName ,Profile profile){
+	public Profile updateProfile(@PathParam("profileName") String profileName, Profile profile) {
 		profile.setProfileName(profileName);
 		return profileService.updateProfile(profile);
 	}
-	
+
 	@DELETE
 	@Path("/{profileName}")
-	public void removeProfile(@PathParam("profileName") String profileName){
+	public void removeProfile(@PathParam("profileName") String profileName) {
 		profileService.removeProfile(profileName);
 	}
-	
+
 	@GET
 	@Path("/{profileName}")
-	public Profile getProfile(@PathParam("profileName") String profileName){
+	public Profile getProfile(@PathParam("profileName") String profileName) {
 		return profileService.getProfile(profileName);
 	}
 }

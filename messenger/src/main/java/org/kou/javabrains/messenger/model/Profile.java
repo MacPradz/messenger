@@ -12,10 +12,10 @@ public class Profile {
 	private String firstName;
 	private String lastName;
 	private Date created;
-	
+
 	public Profile() {
 	}
-	
+
 	public Profile(long id, String profileName, String firstName, String lastName) {
 		super();
 		this.id = id;
