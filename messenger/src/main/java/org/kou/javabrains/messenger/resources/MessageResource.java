@@ -1,7 +1,9 @@
 package org.kou.javabrains.messenger.resources;
 
+import java.util.Arrays;
 import java.util.List;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +16,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.kou.javabrains.messenger.model.Message;
+import org.kou.javabrains.messenger.resources.beans.MessageFilterBean;
 import org.kou.javabrains.messenger.service.MessageService;
 
 //annotations over class are default to all methods
@@ -27,6 +30,20 @@ public class MessageResource {
 	@GET // HTTP method
 	// QueryParam annotation allows filtering in URI like .../messages?year=2015
 	// or .../messages?start=1&size=2
+	//we stored all QueryParams within a Bean. below is commented out previous version
+	public List<Message> getMessage(@BeanParam MessageFilterBean filterBean) {
+		if (filterBean.getYear()> 0) {
+			return messageService.getAllMessagesForYear(filterBean.getYear());
+		}
+		if (filterBean.getStart()>= 0 && filterBean.getSize()> 0) {
+			return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
+		}
+		return messageService.getAllMessages();
+	}
+		
+/*	@GET // HTTP method
+	// QueryParam annotation allows filtering in URI like .../messages?year=2015
+	// or .../messages?start=1&size=2
 	public List<Message> getMessage(@QueryParam("year") int year, @QueryParam("start") int start,
 			@QueryParam("size") int size) {
 		if (year > 0) {
@@ -36,7 +53,7 @@ public class MessageResource {
 			return messageService.getAllMessagesPaginated(start, size);
 		}
 		return messageService.getAllMessages();
-	}
+	}*/
 
 	@POST
 	public Message addMessage(Message message) {

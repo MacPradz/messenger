@@ -1,5 +1,8 @@
 package org.kou.javabrains.messenger.resources;
 
+import java.util.Collection;
+import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.GET;
@@ -7,7 +10,11 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.MatrixParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/injectdemo")
 @Consumes(MediaType.TEXT_PLAIN)
@@ -38,4 +45,14 @@ public class InjectDemoResource {
 	}
 
 	// @FormParam for submitting html forms
+
+	@GET
+	@Path("context")
+	//allows you to get more info, especially when you don't know the name of the header or cookie
+	public String getParamsUsingContext(@Context UriInfo uriInfo, @Context HttpHeaders headers) {
+		String path = uriInfo.getAbsolutePath().toString();
+		Map<String, Cookie> cookies = headers.getCookies();
+		return "path: " + path + " cookies: " + cookies.values();
+	}
+
 }
