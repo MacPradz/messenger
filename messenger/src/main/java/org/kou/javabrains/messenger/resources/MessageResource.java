@@ -1,6 +1,5 @@
 package org.kou.javabrains.messenger.resources;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.BeanParam;
@@ -12,7 +11,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.kou.javabrains.messenger.model.Message;
@@ -80,5 +78,10 @@ public class MessageResource {
 	@Path("/{messageId}")
 	public Message getMessage(@PathParam("messageId") long id) {
 		return messageService.getMessage(id);
+	}
+	
+	@Path("/{messageId}/comments")
+	public CommentResource getCommentResource(){
+		return new CommentResource();
 	}
 }
